@@ -75,6 +75,12 @@ Reference to the socket passed to the constructor.
 
 Takes Node.js [socket](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net_class_net_socket) to attach on.
 
+##### send(message, callback)
+
+> From version 1.0.0
+
+In Socket transport implementation it is possible to pass a callback as a second argument. Callback will be passed directly to `socket.write()` function and called when the message was actually sent. Also, `send()` returns the write status from `socket.write()`. Read more in [Node.js docs](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net_socket_write_data_encoding_callback).
+
 > For details and other methods see common transport interface below
 
 ### Client API
@@ -141,9 +147,9 @@ Detaches transport from the underlying system, making it possible to reuse it wi
 
 Sends a message to the other party using some kind of serialization. Sending a message with closed transport does nothing.
 
-##### close()
+##### close(err)
 
-Closes underlying system, making the transport a subject for garbage collection. Property `open` will become `false` immediately and event `close` will be emitted asynchronously after it has been closed. Calls to `close()` may or may not emitting `close` event when the transport is already closed.
+Closes underlying system, making the transport a subject for garbage collection. Property `open` will become `false` immediately and event `close` will be emitted asynchronously after it has been closed. Optional parameter `err` will be passed to `close` event (available from version 1.0.0). Calls to `close()` may or may not emitting `close` event when the transport is already closed.
 
 ### Client interface
 

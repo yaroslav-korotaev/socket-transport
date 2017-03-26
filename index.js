@@ -40,7 +40,7 @@ class SocketTransport extends EventEmitter {
       }
     };
     this.onError = err => fail = err;
-    this.onClose = () => {
+    this.onClose = hadError => {
       this.open = false;
       this.emit('close', fail);
     };
@@ -63,14 +63,14 @@ class SocketTransport extends EventEmitter {
     return socket;
   }
   
-  send(message) {
+  send(message, callback) {
     const json = JSON.stringify(message);
-    this.socket.write(json.length + '#' + json, 'utf8');
+    return this.socket.write(json.length + '#' + json, 'utf8', callback);
   }
   
-  close() {
+  close(err) {
     this.open = false;
-    this.socket.destroy();
+    this.socket.destroy(err);
   }
 }
 
