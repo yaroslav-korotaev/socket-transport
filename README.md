@@ -18,17 +18,17 @@ const SocketTransport = require('socket-transport');
 
 const server = net.createServer();
 server.on('connection', socket => {
-    console.log('incoming connection');
-    const transport = new SocketTransport(socket);
-    transport.on('message', message => {
-        console.log('message: %j', message);
-    });
-    transport.on('close', err => {
-        console.log('connection closed');
-    });
-    transport.send({
-        foo: 'bar',
-    });
+  console.log('incoming connection');
+  const transport = new SocketTransport(socket);
+  transport.on('message', message => {
+    console.log('message: %j', message);
+  });
+  transport.on('close', err => {
+    console.log('connection closed');
+  });
+  transport.send({
+    foo: 'bar',
+  });
 });
 server.listen(3000);
 ```
@@ -39,21 +39,21 @@ server.listen(3000);
 const connect = require('socket-transport/client');
 
 connect({
-    port: 3000,
-    host: 'localhost',
+  port: 3000,
+  host: 'localhost',
 }, (err, transport) => {
-    if (err)
-        return console.log(err.message);
-    console.log('connected');
-    transport.on('message', message => {
-        console.log('message: %j', message);
-    });
-    transport.on('close', err => {
-        console.log('connection closed');
-    });
-    transport.send({
-        cat: 'meow',
-    });
+  if (err)
+    return console.log(err.message);
+  console.log('connected');
+  transport.on('message', message => {
+    console.log('message: %j', message);
+  });
+  transport.on('close', err => {
+    console.log('connection closed');
+  });
+  transport.send({
+    cat: 'meow',
+  });
 });
 ```
 
