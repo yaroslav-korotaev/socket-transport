@@ -7,7 +7,7 @@ class SocketTransport extends EventEmitter {
     
     let buf = '';
     let length = 0;
-    let readable, i, json, message;
+    let readable, i, json, message; // eslint-disable-line one-var
     
     this.onData = chunk => {
       buf += chunk;

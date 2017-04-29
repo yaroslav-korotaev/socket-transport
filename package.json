@@ -6,5 +6,12 @@
   "bugs": "https://github.com/yaroslav-korotaev/socket-transport/issues",
   "license": "MIT",
   "author": "Yaroslav Korotaev <yaroslav.korotaev@gmail.com>",
-  "repository": "yaroslav-korotaev/socket-transport"
+  "repository": "yaroslav-korotaev/socket-transport",
+  "devDependencies": {
+    "eslint": "~3.15.0",
+    "eslint-config-highload": "~0.1.0"
+  },
+  "scripts": {
+    "test": "eslint --ignore-path .gitignore ."
+  }
 }
