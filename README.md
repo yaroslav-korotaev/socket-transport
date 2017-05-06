@@ -36,9 +36,9 @@ server.listen(3000);
 ### Client
 
 ```js
-const connect = require('socket-transport/client');
+const SocketTransport = require('socket-transport');
 
-connect({
+SocketTransport.connect({
   port: 3000,
   host: 'localhost',
 }, (err, transport) => {
@@ -58,6 +58,8 @@ connect({
 ```
 
 ### SocketTransport API
+
+> For details and other methods see common transport interface below
 
 ```js
 const SocketTransport = require('socket-transport');
@@ -81,21 +83,13 @@ Takes Node.js [socket](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net
 
 In Socket transport implementation it is possible to pass a callback as a second argument. Callback will be passed directly to `socket.write()` function and called when the message was actually sent. Also, `send()` returns the write status from `socket.write()`. Read more in [Node.js docs](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net_socket_write_data_encoding_callback).
 
-> For details and other methods see common transport interface below
+#### Static
 
-### Client API
+##### SocketTransport.connect(options, callback)
 
-```js
-const connect = require('socket-transport/client');
-```
-
-##### connect(options, callback)
+> From version 2.0.0
 
 `options` passed directly to the [net.createConnection()](https://nodejs.org/dist/latest-v6.x/docs/api/net.html#net_net_createconnection_options_connectlistener) Node.js function. Returns Node.js socket.
-
-> For details see common client interface below
-
-#### Static
 
 ##### SocketTransport.MAX_BUF_LENGTH
 
@@ -151,9 +145,7 @@ Sends a message to the other party using some kind of serialization. Sending a m
 
 Closes underlying system, making the transport a subject for garbage collection. Property `open` will become `false` immediately and event `close` will be emitted asynchronously after it has been closed. Optional parameter `err` will be passed to `close` event (available from version 1.0.0). Calls to `close()` may or may not emitting `close` event when the transport is already closed.
 
-### Client interface
-
-Connect function exposed by requiring `/client` on a package, sush as `require('socket-transport/client')`.
+#### Static
 
 ##### connect(options, callback)
 
